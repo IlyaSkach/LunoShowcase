@@ -28,7 +28,7 @@ export default function App(): React.JSX.Element {
   const [activeCategory, setActiveCategory] = useState<CategoryKey>(null);
 
   useEffect(() => {
-    const timer = setTimeout(() => setSplashVisible(false), 900);
+    const timer = setTimeout(() => setSplashVisible(false), 3000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -43,7 +43,7 @@ export default function App(): React.JSX.Element {
         <header>
           <div className="logo shadow-card" aria-label="Логотип">
             <img
-              src="/images/logo.webp"
+              src="/images/logo-pre.png"
               alt="LUNO"
               style={{ width: "72%", height: "72%", objectFit: "contain" }}
             />
@@ -54,8 +54,8 @@ export default function App(): React.JSX.Element {
           <div
             style={{
               display: "flex",
+              flexDirection: "column",
               gap: 12,
-              justifyContent: "space-between",
             }}
           >
             {MENU.map((item) => (
@@ -65,10 +65,10 @@ export default function App(): React.JSX.Element {
                 onClick={() => setActiveCategory(item.key)}
                 className="shadow-card"
                 style={{
-                  flex: 1,
+                  width: "100%",
                   borderRadius: 12,
                   padding: "12px 10px",
-                  border: "1px solid #e6e6e6",
+                  border: "1px solid #000000",
                   background: "#fff",
                 }}
                 whileTap={{ scale: 0.98 }}
@@ -87,8 +87,8 @@ export default function App(): React.JSX.Element {
         </section>
 
         <section className="about">
-          <h2 style={{ fontSize: 18, margin: "0 0 8px" }}>О магазине</h2>
-          <p style={{ margin: 0 }}>
+          <h2 style={{ fontSize: 24, margin: "0 0 8px" }}>О магазине</h2>
+          <p style={{ margin: 0, fontSize: 16 }}>
             Ювелирный дом LUNO — современная мастерская украшений с
             бриллиантами. Мы создаём изящные минималистичные изделия из
             драгоценных металлов, подчёркивая природную красоту камней и чистоту
@@ -123,7 +123,11 @@ export default function App(): React.JSX.Element {
                 <button
                   type="button"
                   onClick={() => setActiveCategory(null)}
-                  style={{ background: "none", border: 0, cursor: "pointer" }}
+                  style={{
+                    background: "none",
+                    border: 0,
+                    cursor: "pointer",
+                  }}
                   aria-label="Закрыть"
                 >
                   ×
@@ -184,7 +188,7 @@ export default function App(): React.JSX.Element {
 
 function SplashScreen({ onHide }: { onHide: () => void }): React.JSX.Element {
   useEffect(() => {
-    const t = setTimeout(onHide, 1000);
+    const t = setTimeout(onHide, 3000);
     return () => clearTimeout(t);
   }, [onHide]);
 
@@ -197,7 +201,7 @@ function SplashScreen({ onHide }: { onHide: () => void }): React.JSX.Element {
       style={{
         position: "fixed",
         inset: 0,
-        background: "#fff",
+        background: "#000000",
         display: "grid",
         placeItems: "center",
         zIndex: 100,
@@ -209,10 +213,13 @@ function SplashScreen({ onHide }: { onHide: () => void }): React.JSX.Element {
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.35 }}
-        className="logo shadow-card"
         style={{ width: 140, height: 140 }}
       >
-        LUNO
+        <img
+          src="/images/logo-pre.png"
+          alt="LUNO"
+          style={{ width: "100%", height: "100%", objectFit: "contain" }}
+        />
       </motion.div>
     </motion.div>
   );
