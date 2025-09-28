@@ -53,8 +53,8 @@ export default function App(): React.JSX.Element {
         <nav aria-label="Главное меню" style={{ marginBottom: 12 }}>
           <div
             style={{
-              display: "flex",
-              flexDirection: "column",
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
               gap: 12,
             }}
           >
@@ -65,7 +65,6 @@ export default function App(): React.JSX.Element {
                 onClick={() => setActiveCategory(item.key)}
                 className="shadow-card"
                 style={{
-                  width: "100%",
                   borderRadius: 12,
                   padding: "12px 10px",
                   border: "1px solid #000000",
