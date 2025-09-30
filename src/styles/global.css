@@ -78,7 +78,7 @@ h5,
 }
 
 .shadow-card {
-  background: back;
+  background: #fff;
   border: 1px solid #eaeaea;
   border-radius: 16px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);

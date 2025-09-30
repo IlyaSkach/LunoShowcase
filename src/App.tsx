@@ -5,10 +5,10 @@ import { AnimatePresence, motion } from "framer-motion";
 type CategoryKey = "rings" | "earrings" | "necklaces" | "collections" | null;
 
 const MENU: { key: Exclude<CategoryKey, null>; title: string }[] = [
-  { key: "rings", title: "Кольца" },
-  { key: "earrings", title: "Серьги" },
-  { key: "necklaces", title: "Колье" },
-  { key: "collections", title: "Коллекции" },
+  { key: "rings", title: "КОЛЬЦА" },
+  { key: "earrings", title: "СЕРЬГИ" },
+  { key: "necklaces", title: "КОЛЬЕ" },
+  { key: "collections", title: "УКРАШЕНИЯ С ЦВЕТНЫМИБРИЛЛИАНТАМИ" },
 ];
 
 function useTelegramInit(): void {
@@ -26,6 +26,7 @@ export default function App(): React.JSX.Element {
   useTelegramInit();
   const [isSplashVisible, setSplashVisible] = useState(true);
   const [activeCategory, setActiveCategory] = useState<CategoryKey>(null);
+  const [isMenuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => setSplashVisible(false), 3000);
@@ -39,142 +40,293 @@ export default function App(): React.JSX.Element {
 
   return (
     <div className="app">
-      <main className="container">
-        <header>
-          <div className="logo shadow-card" aria-label="Логотип">
-            <img
-              src="/images/logo-pre.png"
-              alt="LUNO"
-              style={{ width: "72%", height: "72%", objectFit: "contain" }}
-            />
-          </div>
-        </header>
-
-        <nav aria-label="Главное меню" style={{ marginBottom: 12 }}>
-          <div
+      {/* Общий хедер с бургер-меню */}
+      <header
+        style={{
+          position: "sticky",
+          top: 0,
+          zIndex: 60,
+          background: "var(--bg)",
+          borderBottom: "1px solid #eee",
+        }}
+        aria-label="Шапка"
+      >
+        <div
+          className="container"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            padding: "12px 16px",
+          }}
+        >
+          <button
+            type="button"
+            onClick={() => setMenuOpen(true)}
+            aria-label="Открыть меню"
             style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: 12,
+              background: "none",
+              border: 0,
+              padding: 6,
+              cursor: "pointer",
             }}
           >
-            {MENU.map((item) => (
-              <motion.button
-                key={item.key}
-                type="button"
-                onClick={() => setActiveCategory(item.key)}
-                className="shadow-card"
-                style={{
-                  borderRadius: 12,
-                  padding: "12px 10px",
-                  border: "1px solid #000000",
-                  background: "#fff",
-                }}
-                whileTap={{ scale: 0.98 }}
-                whileHover={{ y: -1 }}
-              >
-                <span style={{ fontSize: 15, fontWeight: 600 }}>
-                  {item.title}
-                </span>
-              </motion.button>
-            ))}
-          </div>
-        </nav>
-
-        <section aria-label="Фото" style={{ marginBottom: 16 }}>
-          <div className="hero" />
-        </section>
-
-        <section className="about">
-          <h2 style={{ fontSize: 24, margin: "0 0 8px" }}>О магазине</h2>
-          <p style={{ margin: 0, fontSize: 16 }}>
-            Ювелирный дом LUNO — современная мастерская украшений с
-            бриллиантами. Мы создаём изящные минималистичные изделия из
-            драгоценных металлов, подчёркивая природную красоту камней и чистоту
-            линий. Индивидуальные заказы, бережная упаковка, доставка по всему
-            миру.
-          </p>
-        </section>
-
-        <AnimatePresence mode="wait">
-          {activeCategory && (
-            <motion.section
-              key={activeCategory}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 8 }}
-              transition={{ duration: 0.2 }}
-              className="shadow-card"
+            <div
               style={{
-                padding: 16,
-                borderRadius: 16,
-                border: "1px solid #e6e6e6",
+                width: 24,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
               }}
             >
               <div
                 style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
+                  height: 2,
+                  background: "#000",
+                  marginBottom: 4,
+                  width: "85%",
+                }}
+              />
+              <div
+                style={{
+                  height: 2,
+                  background: "#000",
+                  marginBottom: 4,
+                  width: "100%",
+                }}
+              />
+              <div
+                style={{
+                  height: 2,
+                  background: "#000",
+                  marginBottom: 4,
+                  width: "85%",
+                }}
+              />
+              <div style={{ height: 2, background: "#000", width: "55%" }} />
+            </div>
+          </button>
+
+          <img src="/images/logo-pre.png" alt="LUNO" style={{ height: 22 }} />
+
+          <div style={{ width: 24 }} />
+        </div>
+      </header>
+
+      <main className="container">
+        {/* отступ после фиксированного хедера */}
+        <div style={{ height: 8 }} />
+
+        {/* Большой hero */}
+        <section aria-label="Фото" style={{ marginBottom: 12 }}>
+          <div className="hero" />
+        </section>
+
+        {/* CTA под hero */}
+        <section aria-label="Выбрать украшение" style={{ marginBottom: 16 }}>
+          <div style={{ display: "grid", placeItems: "center" }}>
+            <motion.button
+              type="button"
+              whileTap={{ scale: 0.98 }}
+              className="shadow-card"
+              style={{
+                background: "#000",
+                color: "#fff",
+                border: "1px solid #000",
+                borderRadius: 12,
+                padding: "14px 16px",
+                width: "100%",
+                maxWidth: 360,
+              }}
+            >
+              Выбрать украшение
+            </motion.button>
+          </div>
+        </section>
+
+        {/* Вертикальный список категорий как в референсе */}
+        <section aria-label="Категории" style={{ marginBottom: 16 }}>
+          <div style={{ display: "grid", gap: 12 }}>
+            {MENU.map((item) => (
+              <div
+                key={`list-${item.key}`}
+                className="shadow-card"
+                style={{
+                  padding: 12,
+                  borderRadius: 12,
+                  border: "1px solid #e6e6e6",
                 }}
               >
-                <h3 style={{ margin: 0, fontSize: 16 }}>{categoryTitle}</h3>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    gap: 12,
+                  }}
+                >
+                  <div style={{ fontSize: 12, color: "#7a7a7a" }}>
+                    {item.title}
+                  </div>
+                  <div
+                    style={{
+                      height: 120,
+                      width: 140,
+                      borderRadius: 10,
+                      background: "#f2f2f2",
+                    }}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Широкие фото-блоки с подписями */}
+        <section aria-label="Мастерская" style={{ marginBottom: 12 }}>
+          <div
+            className="shadow-card"
+            style={{ borderRadius: 16, overflow: "hidden" }}
+          >
+            <div style={{ height: 160, background: "#d9d9d9" }} />
+          </div>
+          <div
+            style={{
+              textAlign: "center",
+              fontSize: 12,
+              color: "#7a7a7a",
+              marginTop: 6,
+            }}
+          >
+            Ювелирная мастерская LUNO DIAMONDS
+          </div>
+        </section>
+
+        <section aria-label="VIP сервис" style={{ marginBottom: 16 }}>
+          <div
+            className="shadow-card"
+            style={{ borderRadius: 16, overflow: "hidden" }}
+          >
+            <div style={{ height: 160, background: "#d9d9d9" }} />
+          </div>
+          <div
+            style={{
+              textAlign: "center",
+              fontSize: 12,
+              color: "#7a7a7a",
+              marginTop: 6,
+            }}
+          >
+            VIP сервис LUNO DIAMONDS
+          </div>
+        </section>
+
+        {/* Финальный тёмный CTA */}
+        <section
+          aria-label="Связаться с экспертом"
+          style={{ marginBottom: 24 }}
+        >
+          <div
+            className="shadow-card"
+            style={{
+              background: "#000",
+              color: "#fff",
+              border: "1px solid #000",
+              borderRadius: 16,
+              padding: 16,
+              textAlign: "center",
+            }}
+          >
+            <div style={{ marginBottom: 8, fontWeight: 600 }}>
+              Поможем определиться с выбором
+            </div>
+            <button
+              type="button"
+              style={{
+                background: "transparent",
+                color: "#fff",
+                border: "1px solid #fff",
+                borderRadius: 12,
+                padding: "10px 12px",
+              }}
+            >
+              Связаться с экспертом
+            </button>
+          </div>
+        </section>
+      </main>
+
+      {/* Оверлей-меню */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            style={{
+              position: "fixed",
+              inset: 0,
+              background: "rgba(0,0,0,0.5)",
+              zIndex: 70,
+              display: "grid",
+              placeItems: "center",
+            }}
+            onClick={() => setMenuOpen(false)}
+            aria-label="Меню"
+          >
+            <motion.div
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: 20, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="shadow-card"
+              style={{
+                background: "#fff",
+                borderRadius: 16,
+                padding: 16,
+                width: "90%",
+                maxWidth: 420,
+              }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  marginBottom: 8,
+                }}
+              >
+                <div style={{ fontWeight: 600 }}>Меню</div>
                 <button
                   type="button"
-                  onClick={() => setActiveCategory(null)}
-                  style={{
-                    background: "none",
-                    border: 0,
-                    cursor: "pointer",
-                  }}
+                  onClick={() => setMenuOpen(false)}
+                  style={{ background: "none", border: 0, cursor: "pointer" }}
                   aria-label="Закрыть"
                 >
                   ×
                 </button>
               </div>
-              <div style={{ height: 8 }} />
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "1fr 1fr",
-                  gap: 8,
-                }}
-              >
-                {[1, 2, 3, 4].map((i) => (
-                  <div
-                    key={i}
+              <div style={{ display: "grid", gap: 8 }}>
+                {MENU.map((item) => (
+                  <button
+                    key={`overlay-${item.key}`}
+                    type="button"
                     className="shadow-card"
-                    style={{ padding: 12, borderRadius: 12 }}
+                    style={{ textAlign: "left", padding: 12, borderRadius: 12 }}
+                    onClick={() => {
+                      setActiveCategory(item.key);
+                      setMenuOpen(false);
+                    }}
                   >
-                    <div
-                      style={{
-                        height: 80,
-                        borderRadius: 10,
-                        background: "#f1f1f1",
-                        marginBottom: 8,
-                      }}
-                    />
-                    <div
-                      style={{
-                        height: 10,
-                        width: "70%",
-                        background: "#eee",
-                        borderRadius: 6,
-                      }}
-                    />
-                  </div>
+                    {item.title}
+                  </button>
                 ))}
               </div>
-              <div style={{ marginTop: 8, color: "#7a7a7a", fontSize: 12 }}>
-                Макеты карточек и подменю появятся позже. Здесь заложена
-                структура и анимация.
-              </div>
-            </motion.section>
-          )}
-        </AnimatePresence>
-      </main>
-
-      <BottomConstructorButton />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <AnimatePresence>
         {isSplashVisible && (
