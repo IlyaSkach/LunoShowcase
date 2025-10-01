@@ -56,8 +56,9 @@ export default function App(): React.JSX.Element {
           style={{
             display: "flex",
             alignItems: "center",
-            justifyContent: "space-between",
+            justifyContent: "center",
             padding: "12px 16px",
+            position: "relative",
           }}
         >
           <button
@@ -65,6 +66,8 @@ export default function App(): React.JSX.Element {
             onClick={() => setMenuOpen(true)}
             aria-label="Открыть меню"
             style={{
+              position: "absolute",
+              left: 16,
               background: "none",
               border: 0,
               padding: 6,
@@ -107,9 +110,7 @@ export default function App(): React.JSX.Element {
             </div>
           </button>
 
-          <img src="/images/logo-pre.png" alt="LUNO" style={{ height: 22 }} />
-
-          <div style={{ width: 24 }} />
+          <img src="/images/logo.png" alt="LUNO" style={{ height: 40 }} />
         </div>
       </header>
 
@@ -144,41 +145,100 @@ export default function App(): React.JSX.Element {
           </div>
         </section>
 
-        {/* Вертикальный список категорий как в референсе */}
+        {/* Вертикальный список категорий с картинками */}
         <section aria-label="Категории" style={{ marginBottom: 16 }}>
           <div style={{ display: "grid", gap: 12 }}>
-            {MENU.map((item) => (
-              <div
-                key={`list-${item.key}`}
-                className="shadow-card"
+            <motion.button
+              type="button"
+              whileTap={{ scale: 0.98 }}
+              onClick={() => setActiveCategory("rings")}
+              style={{
+                border: "none",
+                background: "transparent",
+                padding: 0,
+                cursor: "pointer",
+              }}
+            >
+              <img
+                src="/images/kolca_btn.png"
+                alt="Кольца"
                 style={{
-                  padding: 12,
+                  width: "100%",
+                  height: "auto",
+                  display: "block",
                   borderRadius: 12,
-                  border: "1px solid #e6e6e6",
                 }}
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    gap: 12,
-                  }}
-                >
-                  <div style={{ fontSize: 12, color: "#7a7a7a" }}>
-                    {item.title}
-                  </div>
-                  <div
-                    style={{
-                      height: 120,
-                      width: 140,
-                      borderRadius: 10,
-                      background: "#f2f2f2",
-                    }}
-                  />
-                </div>
-              </div>
-            ))}
+              />
+            </motion.button>
+
+            <motion.button
+              type="button"
+              whileTap={{ scale: 0.98 }}
+              onClick={() => setActiveCategory("earrings")}
+              style={{
+                border: "none",
+                background: "transparent",
+                padding: 0,
+                cursor: "pointer",
+              }}
+            >
+              <img
+                src="/images/sergi_btn.png"
+                alt="Серьги"
+                style={{
+                  width: "100%",
+                  height: "auto",
+                  display: "block",
+                  borderRadius: 12,
+                }}
+              />
+            </motion.button>
+
+            <motion.button
+              type="button"
+              whileTap={{ scale: 0.98 }}
+              onClick={() => setActiveCategory("necklaces")}
+              style={{
+                border: "none",
+                background: "transparent",
+                padding: 0,
+                cursor: "pointer",
+              }}
+            >
+              <img
+                src="/images/kolee_btn.png"
+                alt="Колье"
+                style={{
+                  width: "100%",
+                  height: "auto",
+                  display: "block",
+                  borderRadius: 12,
+                }}
+              />
+            </motion.button>
+
+            <motion.button
+              type="button"
+              whileTap={{ scale: 0.98 }}
+              onClick={() => setActiveCategory("collections")}
+              style={{
+                border: "none",
+                background: "transparent",
+                padding: 0,
+                cursor: "pointer",
+              }}
+            >
+              <img
+                src="/images/yello_btn.png"
+                alt="Украшения с цветными бриллиантами"
+                style={{
+                  width: "100%",
+                  height: "auto",
+                  display: "block",
+                  borderRadius: 12,
+                }}
+              />
+            </motion.button>
           </div>
         </section>
 
@@ -188,7 +248,15 @@ export default function App(): React.JSX.Element {
             className="shadow-card"
             style={{ borderRadius: 16, overflow: "hidden" }}
           >
-            <div style={{ height: 160, background: "#d9d9d9" }} />
+            <img
+              src="/images/masterskaya.png"
+              alt="Ювелирная мастерская LUNO DIAMONDS"
+              style={{
+                width: "100%",
+                height: "auto",
+                display: "block",
+              }}
+            />
           </div>
           <div
             style={{
@@ -207,7 +275,15 @@ export default function App(): React.JSX.Element {
             className="shadow-card"
             style={{ borderRadius: 16, overflow: "hidden" }}
           >
-            <div style={{ height: 160, background: "#d9d9d9" }} />
+            <img
+              src="/images/konserg.png"
+              alt="VIP сервис LUNO DIAMONDS"
+              style={{
+                width: "100%",
+                height: "auto",
+                display: "block",
+              }}
+            />
           </div>
           <div
             style={{
@@ -227,31 +303,57 @@ export default function App(): React.JSX.Element {
           style={{ marginBottom: 24 }}
         >
           <div
-            className="shadow-card"
             style={{
-              background: "#000",
+              background: "#1a1a1a",
               color: "#fff",
-              border: "1px solid #000",
-              borderRadius: 16,
-              padding: 16,
+              borderRadius: 24,
+              padding: "48px 24px",
               textAlign: "center",
+              position: "relative",
+              overflow: "hidden",
             }}
           >
-            <div style={{ marginBottom: 8, fontWeight: 600 }}>
-              Поможем определиться с выбором
-            </div>
-            <button
+            <h2
+              style={{
+                fontSize: 20,
+                fontWeight: 400,
+                marginBottom: 24,
+                letterSpacing: "0.02em",
+                fontFamily: "'Noto Sans', sans-serif",
+                lineHeight: 1.4,
+              }}
+            >
+              ПОМОЖЕМ ОПРЕДЕЛИТЬСЯ
+              <br />С ВЫБОРОМ
+            </h2>
+            <motion.button
               type="button"
+              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.02 }}
               style={{
                 background: "transparent",
                 color: "#fff",
-                border: "1px solid #fff",
-                borderRadius: 12,
-                padding: "10px 12px",
+                border: "2px solid #fff",
+                borderRadius: 60,
+                padding: "12px 32px",
+                fontSize: 13,
+                fontWeight: 500,
+                cursor: "pointer",
+                transition: "all 0.3s ease",
+                fontFamily: "'Noto Sans', sans-serif",
+                letterSpacing: "0.05em",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "#fff";
+                e.currentTarget.style.color = "#1a1a1a";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "transparent";
+                e.currentTarget.style.color = "#fff";
               }}
             >
-              Связаться с экспертом
-            </button>
+              СВЯЗАТЬСЯ С ЭКСПЕРТОМ
+            </motion.button>
           </div>
         </section>
       </main>
