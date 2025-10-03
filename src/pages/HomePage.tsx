@@ -156,7 +156,7 @@ export default function HomePage() {
                   border: "none",
                   borderRadius: 10,
                   padding: "18px 24px",
-                  width: "64%",
+                  width: "90%",
                   fontSize: 14,
                   fontWeight: 500,
                   cursor: "pointer",
