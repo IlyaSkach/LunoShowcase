@@ -132,7 +132,7 @@ export default function HomePage() {
               src="/images/hero.png"
               alt="LUNO DIAMONDS - Ювелирные украшения"
               style={{
-                width: "100%",
+                width: "450px",
                 height: "auto",
                 display: "block",
                 borderRadius: 8,
@@ -143,7 +143,7 @@ export default function HomePage() {
                 width: "100%",
                 display: "grid",
                 placeItems: "center",
-                marginTop: 16,
+                marginTop: 50,
               }}
             >
               <motion.button
