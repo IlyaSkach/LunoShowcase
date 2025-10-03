@@ -116,7 +116,16 @@ export default function HomePage() {
 
         {/* Большой hero */}
         <section aria-label="Фото" style={{ marginBottom: 12 }}>
-          <div className="hero" />
+          <img
+            src="/images/hero.png"
+            alt="LUNO DIAMONDS - Ювелирные украшения"
+            style={{
+              width: "100%",
+              height: "auto",
+              borderRadius: 16,
+              display: "block",
+            }}
+          />
         </section>
 
         {/* CTA под hero */}
@@ -130,13 +139,13 @@ export default function HomePage() {
                 background: "#000",
                 color: "#fff",
                 border: "1px solid #000",
-                borderRadius: 12,
+                borderRadius: 6,
                 padding: "14px 16px",
                 width: "100%",
-                maxWidth: 360,
+                maxWidth: 280,
               }}
             >
-              Выбрать украшение
+              ВЫБРАТЬ УКРАШЕНИЕ
             </motion.button>
           </div>
         </section>
@@ -257,12 +266,15 @@ export default function HomePage() {
           <div
             style={{
               textAlign: "center",
-              fontSize: 12,
-              color: "#7a7a7a",
+              fontSize: 15,
+              color: "#000",
               marginTop: 6,
+              textTransform: "uppercase",
+              textDecoration: "underline",
+              fontWeight: 500,
             }}
           >
-            Ювелирная мастерская LUNO DIAMONDS
+            ЮВЕЛИРНАЯ МАСТЕРСКАЯ <br /> LUNO DIAMONDS
           </div>
         </section>
 
@@ -284,29 +296,30 @@ export default function HomePage() {
           <div
             style={{
               textAlign: "center",
-              fontSize: 12,
-              color: "#7a7a7a",
+              fontSize: 15,
+              color: "#000",
               marginTop: 6,
+              textTransform: "uppercase",
+              textDecoration: "underline",
+              fontWeight: 500,
             }}
           >
-            VIP сервис LUNO DIAMONDS
+            VIP СЕРВИС LUNO DIAMONDS
           </div>
         </section>
 
         {/* Финальный тёмный CTA */}
-        <section
-          aria-label="Связаться с экспертом"
-          style={{ marginBottom: 24 }}
-        >
+        <section aria-label="Связаться с экспертом" style={{ marginBottom: 0 }}>
           <div
             style={{
               background: "#1a1a1a",
               color: "#fff",
-              borderRadius: 24,
               padding: "48px 24px",
               textAlign: "center",
               position: "relative",
               overflow: "hidden",
+              width: "100vw",
+              marginLeft: "calc(-50vw + 50%)",
             }}
           >
             <h2
@@ -330,7 +343,7 @@ export default function HomePage() {
                 background: "transparent",
                 color: "#fff",
                 border: "2px solid #fff",
-                borderRadius: 60,
+                borderRadius: 6,
                 padding: "12px 32px",
                 fontSize: 13,
                 fontWeight: 500,
