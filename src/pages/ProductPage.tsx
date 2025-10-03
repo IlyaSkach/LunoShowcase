@@ -283,7 +283,11 @@ export default function ProductPage() {
                 borderBottom: "1px solid #eee",
               }}
             >
-              <span style={{ fontSize: 20 }}>💎</span>
+              <img
+                src="/images/GTI.png"
+                alt="GIA сертифицированные бриллианты"
+                style={{ width: 20, height: 20 }}
+              />
               <span style={{ fontSize: 13, color: "#666" }}>
                 GIA сертифицированные бриллианты
               </span>
@@ -297,7 +301,11 @@ export default function ProductPage() {
                 borderBottom: "1px solid #eee",
               }}
             >
-              <span style={{ fontSize: 20 }}>📦</span>
+              <img
+                src="/images/delivery.png"
+                alt="Оплата и доставка"
+                style={{ width: 20, height: 20 }}
+              />
               <span style={{ fontSize: 13, color: "#666" }}>
                 Оплата и доставка
               </span>
@@ -310,7 +318,11 @@ export default function ProductPage() {
                 padding: "12px 0",
               }}
             >
-              <span style={{ fontSize: 20 }}>💍</span>
+              <img
+                src="/images/size.png"
+                alt="Узнать размер кольца онлайн"
+                style={{ width: 20, height: 20 }}
+              />
               <span style={{ fontSize: 13, color: "#666" }}>
                 Узнать размер кольца онлайн
               </span>

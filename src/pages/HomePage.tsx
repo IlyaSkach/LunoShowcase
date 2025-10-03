@@ -130,7 +130,7 @@ export default function HomePage() {
           >
             <img
               src="/images/hero.png"
-              alt="LUNO DIAMONDS - Ювелирные украшения"
+              alt="L'UNO DIAMONDS - Ювелирные украшения"
               style={{
                 width: "450px",
                 height: "auto",

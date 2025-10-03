@@ -12,7 +12,7 @@ export default function FooterBlocks() {
         >
           <img
             src="/images/masterskaya.png"
-            alt="Ювелирная мастерская LUNO DIAMONDS"
+            alt="Ювелирная мастерская L'UNO DIAMONDS"
             style={{
               width: "100%",
               height: "auto",
@@ -31,7 +31,7 @@ export default function FooterBlocks() {
             fontWeight: 500,
           }}
         >
-          ЮВЕЛИРНАЯ МАСТЕРСКАЯ <br /> LUNO DIAMONDS
+          ЮВЕЛИРНАЯ МАСТЕРСКАЯ <br /> L'UNO DIAMONDS
         </div>
       </section>
 
@@ -62,7 +62,7 @@ export default function FooterBlocks() {
             fontWeight: 500,
           }}
         >
-          VIP СЕРВИС LUNO DIAMONDS
+          VIP СЕРВИС L'UNO DIAMONDS
         </div>
       </section>
 
