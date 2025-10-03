@@ -83,27 +83,13 @@ export default function CategoryPage({ category }: CategoryPageProps) {
               fontSize: 24,
             }}
           >
-            ☰
+            ←
           </button>
           <img src="/images/logo.png" alt="LUNO" style={{ height: 40 }} />
         </div>
       </header>
 
       <main className="container">
-        {/* Баннер */}
-        <section style={{ marginBottom: 16, marginTop: 8 }}>
-          <img
-            src="/images/hero.png"
-            alt={CATEGORY_TITLES[category]}
-            style={{
-              width: "100%",
-              height: "auto",
-              borderRadius: 16,
-              display: "block",
-            }}
-          />
-        </section>
-
         {/* Заголовок и количество */}
         <section style={{ marginBottom: 16 }}>
           <h1

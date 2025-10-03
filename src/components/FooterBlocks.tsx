@@ -1,14 +1,28 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 export default function FooterBlocks() {
+  const navigate = useNavigate();
+
+  const handleWorkshopClick = () => {
+    navigate("/about");
+  };
+
+  const handleVIPClick = () => {
+    navigate("/vip");
+  };
+
   return (
     <>
       {/* Ювелирная мастерская */}
       <section aria-label="Мастерская" style={{ marginBottom: 12 }}>
-        <div
+        <motion.div
           className="shadow-card"
-          style={{ borderRadius: 16, overflow: "hidden" }}
+          style={{ borderRadius: 16, overflow: "hidden", cursor: "pointer" }}
+          onClick={handleWorkshopClick}
+          whileTap={{ scale: 0.98 }}
+          whileHover={{ scale: 1.02 }}
         >
           <img
             src="/images/masterskaya.png"
@@ -19,8 +33,8 @@ export default function FooterBlocks() {
               display: "block",
             }}
           />
-        </div>
-        <div
+        </motion.div>
+        <motion.div
           style={{
             textAlign: "center",
             fontSize: 15,
@@ -29,17 +43,24 @@ export default function FooterBlocks() {
             textTransform: "uppercase",
             textDecoration: "underline",
             fontWeight: 500,
+            cursor: "pointer",
           }}
+          onClick={handleWorkshopClick}
+          whileTap={{ scale: 0.98 }}
+          whileHover={{ scale: 1.02 }}
         >
           ЮВЕЛИРНАЯ МАСТЕРСКАЯ <br /> L'UNO DIAMONDS
-        </div>
+        </motion.div>
       </section>
 
       {/* VIP сервис */}
       <section aria-label="VIP сервис" style={{ marginBottom: 16 }}>
-        <div
+        <motion.div
           className="shadow-card"
-          style={{ borderRadius: 16, overflow: "hidden" }}
+          style={{ borderRadius: 16, overflow: "hidden", cursor: "pointer" }}
+          onClick={handleVIPClick}
+          whileTap={{ scale: 0.98 }}
+          whileHover={{ scale: 1.02 }}
         >
           <img
             src="/images/konserg.png"
@@ -50,8 +71,8 @@ export default function FooterBlocks() {
               display: "block",
             }}
           />
-        </div>
-        <div
+        </motion.div>
+        <motion.div
           style={{
             textAlign: "center",
             fontSize: 15,
@@ -60,10 +81,14 @@ export default function FooterBlocks() {
             textTransform: "uppercase",
             textDecoration: "underline",
             fontWeight: 500,
+            cursor: "pointer",
           }}
+          onClick={handleVIPClick}
+          whileTap={{ scale: 0.98 }}
+          whileHover={{ scale: 1.02 }}
         >
           VIP СЕРВИС L'UNO DIAMONDS
-        </div>
+        </motion.div>
       </section>
 
       {/* Финальный тёмный CTA */}

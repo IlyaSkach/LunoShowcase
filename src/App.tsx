@@ -3,6 +3,8 @@ import { Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import CategoryPage from "./pages/CategoryPage";
 import ProductPage from "./pages/ProductPage";
+import AboutPage from "./pages/AboutPage";
+import VIPPage from "./pages/VIPPage";
 
 export default function App(): React.JSX.Element {
   return (
@@ -19,6 +21,8 @@ export default function App(): React.JSX.Element {
         element={<CategoryPage category="collections" />}
       />
       <Route path="/:category/:id" element={<ProductPage />} />
+      <Route path="/about" element={<AboutPage />} />
+      <Route path="/vip" element={<VIPPage />} />
     </Routes>
   );
 }
