@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { getProductById } from "../data/products";
+import FooterBlocks from "../components/FooterBlocks";
 
 export default function ProductPage() {
   const navigate = useNavigate();
@@ -85,7 +86,6 @@ export default function ProductPage() {
               position: "relative",
               borderRadius: 16,
               overflow: "hidden",
-              background: "#f5f5f5",
             }}
           >
             <img
@@ -210,7 +210,7 @@ export default function ProductPage() {
               style={{
                 fontSize: 14,
                 fontWeight: 500,
-                fontFamily: "'Noto Sans', sans-serif",
+                fontFamily: "'Nunito', sans-serif",
               }}
             >
               Цена
@@ -219,7 +219,7 @@ export default function ProductPage() {
               style={{
                 fontSize: 24,
                 fontWeight: 600,
-                fontFamily: "'Noto Sans', sans-serif",
+                fontFamily: "'Nunito', sans-serif",
               }}
             >
               {product.price.toLocaleString("ru-RU")} ₽
@@ -244,7 +244,7 @@ export default function ProductPage() {
                 fontSize: 13,
                 fontWeight: 600,
                 cursor: "pointer",
-                fontFamily: "'Noto Sans', sans-serif",
+                fontFamily: "'Nunito', sans-serif",
                 letterSpacing: "0.02em",
               }}
             >
@@ -262,7 +262,7 @@ export default function ProductPage() {
                 fontSize: 13,
                 fontWeight: 600,
                 cursor: "pointer",
-                fontFamily: "'Noto Sans', sans-serif",
+                fontFamily: "'Nunito', sans-serif",
                 letterSpacing: "0.02em",
               }}
             >
@@ -317,6 +317,9 @@ export default function ProductPage() {
             </div>
           </div>
         </section>
+
+        {/* Footer блоки */}
+        <FooterBlocks />
       </main>
 
       {/* Модальное окно с увеличенным изображением */}

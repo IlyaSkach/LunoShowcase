@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import WebApp from "@twa-dev/sdk";
 import { AnimatePresence, motion } from "framer-motion";
+import FooterBlocks from "../components/FooterBlocks";
 
 type CategoryKey = "rings" | "earrings" | "necklaces" | "collections" | null;
 
@@ -116,37 +117,57 @@ export default function HomePage() {
 
         {/* Большой hero */}
         <section aria-label="Фото" style={{ marginBottom: 12 }}>
-          <img
-            src="/images/hero.png"
-            alt="LUNO DIAMONDS - Ювелирные украшения"
+          <div
             style={{
-              width: "100%",
-              height: "auto",
+              background: "#f1f0ec",
               borderRadius: 16,
-              display: "block",
+              padding: "20px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              flexDirection: "column",
             }}
-          />
-        </section>
-
-        {/* CTA под hero */}
-        <section aria-label="Выбрать украшение" style={{ marginBottom: 16 }}>
-          <div style={{ display: "grid", placeItems: "center" }}>
-            <motion.button
-              type="button"
-              whileTap={{ scale: 0.98 }}
-              className="shadow-card"
+          >
+            <img
+              src="/images/hero.png"
+              alt="LUNO DIAMONDS - Ювелирные украшения"
               style={{
-                background: "#000",
-                color: "#fff",
-                border: "1px solid #000",
-                borderRadius: 6,
-                padding: "14px 16px",
                 width: "100%",
-                maxWidth: 280,
+                height: "auto",
+                display: "block",
+                borderRadius: 8,
+              }}
+            />
+            <div
+              style={{
+                width: "100%",
+                display: "grid",
+                placeItems: "center",
+                marginTop: 16,
               }}
             >
-              ВЫБРАТЬ УКРАШЕНИЕ
-            </motion.button>
+              <motion.button
+                type="button"
+                whileTap={{ scale: 0.98 }}
+                whileHover={{ scale: 1.02 }}
+                style={{
+                  background: "#000",
+                  color: "#fff",
+                  border: "none",
+                  borderRadius: 10,
+                  padding: "18px 24px",
+                  width: "64%",
+                  fontSize: 14,
+                  fontWeight: 500,
+                  cursor: "pointer",
+                  fontFamily: "'Nunito', sans-serif",
+                  letterSpacing: "0.02em",
+                  textTransform: "uppercase",
+                }}
+              >
+                ВЫБРАТЬ УКРАШЕНИЕ
+              </motion.button>
+            </div>
           </div>
         </section>
 
@@ -248,123 +269,7 @@ export default function HomePage() {
         </section>
 
         {/* Широкие фото-блоки с подписями */}
-        <section aria-label="Мастерская" style={{ marginBottom: 12 }}>
-          <div
-            className="shadow-card"
-            style={{ borderRadius: 16, overflow: "hidden" }}
-          >
-            <img
-              src="/images/masterskaya.png"
-              alt="Ювелирная мастерская LUNO DIAMONDS"
-              style={{
-                width: "100%",
-                height: "auto",
-                display: "block",
-              }}
-            />
-          </div>
-          <div
-            style={{
-              textAlign: "center",
-              fontSize: 15,
-              color: "#000",
-              marginTop: 6,
-              textTransform: "uppercase",
-              textDecoration: "underline",
-              fontWeight: 500,
-            }}
-          >
-            ЮВЕЛИРНАЯ МАСТЕРСКАЯ <br /> LUNO DIAMONDS
-          </div>
-        </section>
-
-        <section aria-label="VIP сервис" style={{ marginBottom: 16 }}>
-          <div
-            className="shadow-card"
-            style={{ borderRadius: 16, overflow: "hidden" }}
-          >
-            <img
-              src="/images/konserg.png"
-              alt="VIP сервис LUNO DIAMONDS"
-              style={{
-                width: "100%",
-                height: "auto",
-                display: "block",
-              }}
-            />
-          </div>
-          <div
-            style={{
-              textAlign: "center",
-              fontSize: 15,
-              color: "#000",
-              marginTop: 6,
-              textTransform: "uppercase",
-              textDecoration: "underline",
-              fontWeight: 500,
-            }}
-          >
-            VIP СЕРВИС LUNO DIAMONDS
-          </div>
-        </section>
-
-        {/* Финальный тёмный CTA */}
-        <section aria-label="Связаться с экспертом" style={{ marginBottom: 0 }}>
-          <div
-            style={{
-              background: "#1a1a1a",
-              color: "#fff",
-              padding: "48px 24px",
-              textAlign: "center",
-              position: "relative",
-              overflow: "hidden",
-              width: "100vw",
-              marginLeft: "calc(-50vw + 50%)",
-            }}
-          >
-            <h2
-              style={{
-                fontSize: 20,
-                fontWeight: 400,
-                marginBottom: 24,
-                letterSpacing: "0.02em",
-                fontFamily: "'Noto Sans', sans-serif",
-                lineHeight: 1.4,
-              }}
-            >
-              ПОМОЖЕМ ОПРЕДЕЛИТЬСЯ
-              <br />С ВЫБОРОМ
-            </h2>
-            <motion.button
-              type="button"
-              whileTap={{ scale: 0.95 }}
-              whileHover={{ scale: 1.02 }}
-              style={{
-                background: "transparent",
-                color: "#fff",
-                border: "2px solid #fff",
-                borderRadius: 6,
-                padding: "12px 32px",
-                fontSize: 13,
-                fontWeight: 500,
-                cursor: "pointer",
-                transition: "all 0.3s ease",
-                fontFamily: "'Noto Sans', sans-serif",
-                letterSpacing: "0.05em",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = "#fff";
-                e.currentTarget.style.color = "#1a1a1a";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = "transparent";
-                e.currentTarget.style.color = "#fff";
-              }}
-            >
-              СВЯЗАТЬСЯ С ЭКСПЕРТОМ
-            </motion.button>
-          </div>
-        </section>
+        <FooterBlocks />
       </main>
 
       {/* Оверлей-меню */}
@@ -412,6 +317,7 @@ export default function HomePage() {
                   border: 0,
                   fontSize: 28,
                   cursor: "pointer",
+                  color: "#000",
                 }}
               >
                 ×
@@ -435,11 +341,36 @@ export default function HomePage() {
                       borderBottom: "1px solid #eee",
                       fontSize: 16,
                       cursor: "pointer",
+                      color: "#000",
                     }}
                   >
                     {item.title}
                   </button>
                 ))}
+                <motion.button
+                  type="button"
+                  whileTap={{ scale: 0.98 }}
+                  onClick={() => setMenuOpen(false)}
+                  style={{
+                    display: "block",
+                    width: "100%",
+                    textAlign: "center",
+                    padding: "16px 24px",
+                    marginTop: 24,
+                    background: "#000",
+                    border: "none",
+                    borderRadius: 6,
+                    fontSize: 13,
+                    fontWeight: 500,
+                    cursor: "pointer",
+                    color: "#fff",
+                    fontFamily: "'Nunito', sans-serif",
+                    letterSpacing: "0.05em",
+                    textTransform: "uppercase",
+                  }}
+                >
+                  СВЯЗАТЬСЯ С ЭКСПЕРТОМ
+                </motion.button>
               </div>
             </motion.div>
           </motion.div>

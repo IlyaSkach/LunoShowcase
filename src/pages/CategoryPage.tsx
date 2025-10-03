@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { getProductsByCategory, Product } from "../data/products";
+import FooterBlocks from "../components/FooterBlocks";
 
 interface CategoryPageProps {
   category: "rings" | "earrings" | "necklaces" | "collections";
@@ -20,6 +21,7 @@ export default function CategoryPage({ category }: CategoryPageProps) {
   const [sortBy, setSortBy] = useState<
     "price-asc" | "price-desc" | "rating-asc" | "rating-desc"
   >("price-asc");
+  const [visibleCount, setVisibleCount] = useState(6);
 
   // Сортировка товаров
   const sortedProducts = [...products].sort((a, b) => {
@@ -37,6 +39,14 @@ export default function CategoryPage({ category }: CategoryPageProps) {
     }
     return 0;
   });
+
+  // Показываем только видимые товары
+  const visibleProducts = sortedProducts.slice(0, visibleCount);
+  const hasMoreProducts = visibleCount < sortedProducts.length;
+
+  const loadMore = () => {
+    setVisibleCount((prev) => Math.min(prev + 6, sortedProducts.length));
+  };
 
   return (
     <div className="app">
@@ -101,7 +111,7 @@ export default function CategoryPage({ category }: CategoryPageProps) {
               fontSize: 24,
               fontWeight: 600,
               margin: "0 0 4px 0",
-              fontFamily: "'Noto Sans', sans-serif",
+              fontFamily: "'Nunito', sans-serif",
             }}
           >
             {CATEGORY_TITLES[category]}{" "}
@@ -132,7 +142,7 @@ export default function CategoryPage({ category }: CategoryPageProps) {
               background: sortBy.startsWith("price") ? "#f0f0f0" : "#fff",
               fontSize: 13,
               cursor: "pointer",
-              fontFamily: "'Noto Sans', sans-serif",
+              fontFamily: "'Nunito', sans-serif",
             }}
           >
             ЦЕНА{" "}
@@ -150,7 +160,7 @@ export default function CategoryPage({ category }: CategoryPageProps) {
               background: sortBy.startsWith("rating") ? "#f0f0f0" : "#fff",
               fontSize: 13,
               cursor: "pointer",
-              fontFamily: "'Noto Sans', sans-serif",
+              fontFamily: "'Nunito', sans-serif",
             }}
           >
             РЕЙТИНГ{" "}
@@ -171,7 +181,7 @@ export default function CategoryPage({ category }: CategoryPageProps) {
               gap: 16,
             }}
           >
-            {sortedProducts.map((product) => (
+            {visibleProducts.map((product) => (
               <motion.div
                 key={product.id}
                 whileTap={{ scale: 0.97 }}
@@ -188,7 +198,6 @@ export default function CategoryPage({ category }: CategoryPageProps) {
                     borderRadius: 12,
                     overflow: "hidden",
                     marginBottom: 8,
-                    background: "#f5f5f5",
                   }}
                 >
                   <img
@@ -209,7 +218,7 @@ export default function CategoryPage({ category }: CategoryPageProps) {
                       fontSize: 14,
                       fontWeight: 500,
                       marginBottom: 4,
-                      fontFamily: "'Noto Sans', sans-serif",
+                      fontFamily: "'Nunito', sans-serif",
                     }}
                   >
                     {product.name}
@@ -218,7 +227,7 @@ export default function CategoryPage({ category }: CategoryPageProps) {
                     style={{
                       fontSize: 13,
                       color: "#666",
-                      fontFamily: "'Noto Sans', sans-serif",
+                      fontFamily: "'Nunito', sans-serif",
                     }}
                   >
                     от {product.price.toLocaleString("ru-RU")} руб.
@@ -230,24 +239,31 @@ export default function CategoryPage({ category }: CategoryPageProps) {
         </section>
 
         {/* Кнопка "Посмотреть еще" */}
-        <section style={{ textAlign: "center", marginBottom: 24 }}>
-          <button
-            type="button"
-            style={{
-              padding: "12px 32px",
-              border: "1px solid #000",
-              borderRadius: 8,
-              background: "#fff",
-              fontSize: 13,
-              fontWeight: 500,
-              cursor: "pointer",
-              fontFamily: "'Noto Sans', sans-serif",
-              letterSpacing: "0.02em",
-            }}
-          >
-            ПОСМОТРЕТЬ ЕЩЕ
-          </button>
-        </section>
+        {hasMoreProducts && (
+          <section style={{ textAlign: "center", marginBottom: 24 }}>
+            <motion.button
+              type="button"
+              whileTap={{ scale: 0.98 }}
+              onClick={loadMore}
+              style={{
+                padding: "12px 32px",
+                border: "1px solid #000",
+                borderRadius: 8,
+                background: "#fff",
+                fontSize: 13,
+                fontWeight: 500,
+                cursor: "pointer",
+                fontFamily: "'Nunito', sans-serif",
+                letterSpacing: "0.02em",
+              }}
+            >
+              ПОСМОТРЕТЬ ЕЩЕ ({sortedProducts.length - visibleCount} осталось)
+            </motion.button>
+          </section>
+        )}
+
+        {/* Footer блоки */}
+        <FooterBlocks />
       </main>
     </div>
   );
