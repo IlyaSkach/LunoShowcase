@@ -155,6 +155,9 @@ export default function CategoryPage({ category }: CategoryPageProps) {
               color: "#000",
               WebkitAppearance: "none",
               appearance: "none",
+              WebkitTouchCallout: "none",
+              WebkitUserSelect: "none",
+              WebkitTapHighlightColor: "transparent",
             }}
           >
             ЦЕНА {sortBy === "price-asc" ? "↑" : "↓"}
@@ -175,14 +178,12 @@ export default function CategoryPage({ category }: CategoryPageProps) {
               color: "#000",
               WebkitAppearance: "none",
               appearance: "none",
+              WebkitTouchCallout: "none",
+              WebkitUserSelect: "none",
+              WebkitTapHighlightColor: "transparent",
             }}
           >
-            РЕЙТИНГ{" "}
-            {sortBy === "rating-desc"
-              ? "↓"
-              : sortBy === "rating-asc"
-              ? "↑"
-              : "↕"}
+            РЕЙТИНГ {sortBy === "rating-desc" ? "↓" : "↑"}
           </button>
         </section>
 
