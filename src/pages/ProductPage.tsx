@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { getProductById } from "../data/products";
@@ -9,6 +9,11 @@ export default function ProductPage() {
   const { category, id } = useParams<{ category: string; id: string }>();
   const product = getProductById(id || "");
   const [isImageModalOpen, setImageModalOpen] = useState(false);
+
+  // Прокрутка к верху страницы при загрузке
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   if (!product) {
     return (

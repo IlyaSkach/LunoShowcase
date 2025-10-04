@@ -925,7 +925,7 @@ export const earrings: Product[] = [
   },
   {
     id: "earring-016",
-    name: "Серьги Burst",
+    name: "Серьги Fogli",
     price: 232200,
     image: "/images/products/earrings/ME038983.png",
     weight: "1.50 ct",
@@ -937,7 +937,7 @@ export const earrings: Product[] = [
   },
   {
     id: "earring-017",
-    name: "Серьги Bypass",
+    name: "Серьги Boccioli",
     price: 153900,
     image: "/images/products/earrings/ME038984.png",
     weight: "0.56 ct",

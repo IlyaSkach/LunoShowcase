@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
 export default function AboutPage(): React.JSX.Element {
   const navigate = useNavigate();
+
+  // Прокрутка к верху страницы при загрузке
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleBackClick = () => {
     navigate(-1);
@@ -130,14 +135,16 @@ export default function AboutPage(): React.JSX.Element {
               вопросы 24/7.
             </p>
 
-            <h2
+            <p
               style={{
                 marginBottom: 20,
                 fontWeight: 600,
               }}
             >
-              Создайте свое уникальное украшение с L'UNO Diamonds:
-            </h2>
+              <strong>
+                Создайте свое уникальное украшение с L'UNO Diamonds:
+              </strong>
+            </p>
 
             <ul style={{ marginBottom: 32, paddingLeft: 20 }}>
               <li style={{ marginBottom: 16 }}>

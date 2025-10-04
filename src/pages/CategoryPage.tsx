@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { getProductsByCategory, Product } from "../data/products";
@@ -22,6 +22,11 @@ export default function CategoryPage({ category }: CategoryPageProps) {
     "price-asc" | "price-desc" | "rating-asc" | "rating-desc"
   >("price-asc");
   const [visibleCount, setVisibleCount] = useState(6);
+
+  // Прокрутка к верху страницы при загрузке
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   // Список изображений, которые отсутствуют (скрываем эти товары)
   const hiddenImages = new Set<string>([
@@ -147,6 +152,9 @@ export default function CategoryPage({ category }: CategoryPageProps) {
               fontSize: 13,
               cursor: "pointer",
               fontFamily: "'Nunito', sans-serif",
+              color: "#000",
+              WebkitAppearance: "none",
+              appearance: "none",
             }}
           >
             ЦЕНА{" "}
@@ -165,6 +173,9 @@ export default function CategoryPage({ category }: CategoryPageProps) {
               fontSize: 13,
               cursor: "pointer",
               fontFamily: "'Nunito', sans-serif",
+              color: "#000",
+              WebkitAppearance: "none",
+              appearance: "none",
             }}
           >
             РЕЙТИНГ{" "}
