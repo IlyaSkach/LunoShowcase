@@ -20,7 +20,7 @@ export default function CategoryPage({ category }: CategoryPageProps) {
   const products = getProductsByCategory(category);
   const [sortBy, setSortBy] = useState<
     "price-asc" | "price-desc" | "rating-asc" | "rating-desc"
-  >("price-asc");
+  >("price-desc");
   const [visibleCount, setVisibleCount] = useState(6);
 
   // Прокрутка к верху страницы при загрузке
@@ -142,7 +142,7 @@ export default function CategoryPage({ category }: CategoryPageProps) {
           <button
             type="button"
             onClick={() =>
-              setSortBy(sortBy === "price-asc" ? "price-desc" : "price-asc")
+              setSortBy(sortBy === "price-desc" ? "price-asc" : "price-desc")
             }
             style={{
               padding: "8px 16px",
@@ -157,8 +157,7 @@ export default function CategoryPage({ category }: CategoryPageProps) {
               appearance: "none",
             }}
           >
-            ЦЕНА{" "}
-            {sortBy === "price-asc" ? "↑" : sortBy === "price-desc" ? "↓" : "↕"}
+            ЦЕНА {sortBy === "price-asc" ? "↑" : "↓"}
           </button>
           <button
             type="button"
