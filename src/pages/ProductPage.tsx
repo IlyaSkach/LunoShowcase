@@ -291,7 +291,7 @@ export default function ProductPage() {
                 style={{ width: 20, height: 20 }}
               />
               <span style={{ fontSize: 13, color: "#666" }}>
-                GIA сертифицированные бриллианты
+                IGI сертифицированные бриллианты
               </span>
             </div>
             <div
