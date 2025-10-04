@@ -270,6 +270,12 @@ export default function CategoryPage({ category }: CategoryPageProps) {
                 cursor: "pointer",
                 fontFamily: "'Nunito', sans-serif",
                 letterSpacing: "0.02em",
+                color: "#000",
+                WebkitAppearance: "none",
+                appearance: "none",
+                WebkitTouchCallout: "none",
+                WebkitUserSelect: "none",
+                WebkitTapHighlightColor: "transparent",
               }}
             >
               ПОСМОТРЕТЬ ЕЩЕ ({sortedProducts.length - visibleCount} осталось)
