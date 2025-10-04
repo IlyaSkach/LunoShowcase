@@ -234,6 +234,7 @@ export default function ProductPage() {
           >
             <motion.button
               type="button"
+              onClick={() => window.open("https://t.me/lunodiamonds", "_blank")}
               whileTap={{ scale: 0.97 }}
               style={{
                 padding: "14px 16px",
@@ -252,6 +253,7 @@ export default function ProductPage() {
             </motion.button>
             <motion.button
               type="button"
+              onClick={() => window.open("https://t.me/lunodiamonds", "_blank")}
               whileTap={{ scale: 0.97 }}
               style={{
                 padding: "14px 16px",

@@ -148,6 +148,7 @@ export default function HomePage() {
             >
               <motion.button
                 type="button"
+                onClick={() => navigate("/rings")}
                 whileTap={{ scale: 0.98 }}
                 whileHover={{ scale: 1.02 }}
                 style={{
@@ -350,7 +351,10 @@ export default function HomePage() {
                 <motion.button
                   type="button"
                   whileTap={{ scale: 0.98 }}
-                  onClick={() => setMenuOpen(false)}
+                  onClick={() => {
+                    setMenuOpen(false);
+                    window.open("https://t.me/lunodiamonds", "_blank");
+                  }}
                   style={{
                     display: "block",
                     width: "100%",

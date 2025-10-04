@@ -23,8 +23,26 @@ export default function CategoryPage({ category }: CategoryPageProps) {
   >("price-asc");
   const [visibleCount, setVisibleCount] = useState(6);
 
+  // Список изображений, которые отсутствуют (скрываем эти товары)
+  const hiddenImages = new Set<string>([
+    // Товары без изображений (можно добавить вручную при необходимости)
+    // Например: "/images/products/rings/K651300.png"
+  ]);
+
+  // Фильтруем товары с изображениями (показываем только товары с валидными изображениями)
+  const productsWithImages = products.filter((product) => {
+    // Проверяем, что изображение не в списке скрытых
+    if (hiddenImages.has(product.image)) {
+      return false;
+    }
+
+    // Дополнительная проверка: можно добавить логику для проверки существования файла
+    // Пока оставляем все товары, которые не в списке скрытых
+    return true;
+  });
+
   // Сортировка товаров
-  const sortedProducts = [...products].sort((a, b) => {
+  const sortedProducts = [...productsWithImages].sort((a, b) => {
     if (sortBy === "price-asc") {
       return a.price - b.price;
     }

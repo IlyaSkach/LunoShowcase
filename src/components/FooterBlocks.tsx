@@ -120,6 +120,7 @@ export default function FooterBlocks() {
           </h2>
           <motion.button
             type="button"
+            onClick={() => window.open("https://t.me/lunodiamonds", "_blank")}
             whileTap={{ scale: 0.95 }}
             whileHover={{ scale: 1.02 }}
             style={{

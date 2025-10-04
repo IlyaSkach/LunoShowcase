@@ -10,8 +10,7 @@ export default function AboutPage(): React.JSX.Element {
   };
 
   const handleOrderClick = () => {
-    // Здесь можно добавить логику для заказа украшения
-    console.log("Заказ украшения");
+    window.open("https://t.me/lunodiamonds", "_blank");
   };
 
   return (
@@ -101,8 +100,15 @@ export default function AboutPage(): React.JSX.Element {
             boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
           }}
         >
-          <div style={{ fontSize: 16, lineHeight: 1.6, color: "#333" }}>
-            <p style={{ marginBottom: 24, fontWeight: 500 }}>
+          <div
+            style={{
+              fontSize: 16,
+              lineHeight: 1.6,
+              color: "#333",
+              fontFamily: "'Nunito', sans-serif",
+            }}
+          >
+            <p style={{ marginBottom: 24 }}>
               <strong>L'UNO (ит. «Один»)</strong>: символизирует уникальность,
               первооснову, единственную истинную форму, внутреннюю целостность.
             </p>
@@ -126,10 +132,8 @@ export default function AboutPage(): React.JSX.Element {
 
             <h2
               style={{
-                fontSize: 20,
-                fontWeight: 600,
                 marginBottom: 20,
-                color: "#1a1a1a",
+                fontWeight: 600,
               }}
             >
               Создайте свое уникальное украшение с L'UNO Diamonds:
@@ -167,11 +171,9 @@ export default function AboutPage(): React.JSX.Element {
 
             <p
               style={{
-                fontSize: 18,
-                fontWeight: 500,
                 textAlign: "center",
                 marginBottom: 32,
-                color: "#1a1a1a",
+                fontWeight: 600,
               }}
             >
               Комфортный сервис в одно касание с заботой о вас 🗝️
@@ -189,7 +191,7 @@ export default function AboutPage(): React.JSX.Element {
                   border: "none",
                   borderRadius: 12,
                   padding: "16px 32px",
-                  fontSize: 16,
+                  fontSize: 18,
                   fontWeight: 600,
                   cursor: "pointer",
                   fontFamily: "'Nunito', sans-serif",
