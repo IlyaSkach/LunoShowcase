@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { getProductById } from "../data/products";
+import {
+  validatePromocode,
+  calculateDiscountedPrice,
+} from "../data/promocodes";
 import FooterBlocks from "../components/FooterBlocks";
 
 export default function ProductPage() {
@@ -9,6 +13,28 @@ export default function ProductPage() {
   const { category, id } = useParams<{ category: string; id: string }>();
   const product = getProductById(id || "");
   const [isImageModalOpen, setImageModalOpen] = useState(false);
+
+  // Состояние для промокода
+  const [promoCode, setPromoCode] = useState("");
+  const [promoDiscount, setPromoDiscount] = useState(0);
+  const [promoMessage, setPromoMessage] = useState("");
+  const [isPromoValid, setIsPromoValid] = useState(false);
+
+  // Применение промокода
+  const handleApplyPromo = () => {
+    const result = validatePromocode(promoCode);
+    setPromoDiscount(result.discount);
+    setPromoMessage(result.message);
+    setIsPromoValid(result.valid);
+  };
+
+  // Сброс промокода
+  const handleResetPromo = () => {
+    setPromoCode("");
+    setPromoDiscount(0);
+    setPromoMessage("");
+    setIsPromoValid(false);
+  };
 
   // Прокрутка к верху страницы при загрузке
   useEffect(() => {
@@ -202,6 +228,102 @@ export default function ProductPage() {
           </div>
         </section>
 
+        {/* Промокод */}
+        <section style={{ marginBottom: 16 }}>
+          <div
+            style={{
+              background: "#f9f9f9",
+              borderRadius: 12,
+              padding: 16,
+            }}
+          >
+            <div
+              style={{
+                fontSize: 14,
+                fontWeight: 500,
+                marginBottom: 12,
+                fontFamily: "'Nunito', sans-serif",
+              }}
+            >
+              Есть промокод?
+            </div>
+            <div style={{ display: "flex", gap: 8 }}>
+              <input
+                type="text"
+                value={promoCode}
+                onChange={(e) => setPromoCode(e.target.value.toUpperCase())}
+                placeholder="Введите промокод"
+                style={{
+                  flex: 1,
+                  padding: "12px 16px",
+                  border: isPromoValid
+                    ? "2px solid #4CAF50"
+                    : "1px solid #ddd",
+                  borderRadius: 8,
+                  fontSize: 14,
+                  fontFamily: "'Nunito', sans-serif",
+                  outline: "none",
+                  textTransform: "uppercase",
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") handleApplyPromo();
+                }}
+              />
+              {isPromoValid ? (
+                <motion.button
+                  type="button"
+                  onClick={handleResetPromo}
+                  whileTap={{ scale: 0.97 }}
+                  style={{
+                    padding: "12px 16px",
+                    background: "#ff5252",
+                    color: "#fff",
+                    border: "none",
+                    borderRadius: 8,
+                    fontSize: 13,
+                    fontWeight: 500,
+                    cursor: "pointer",
+                    fontFamily: "'Nunito', sans-serif",
+                  }}
+                >
+                  ✕
+                </motion.button>
+              ) : (
+                <motion.button
+                  type="button"
+                  onClick={handleApplyPromo}
+                  whileTap={{ scale: 0.97 }}
+                  style={{
+                    padding: "12px 16px",
+                    background: "#000",
+                    color: "#fff",
+                    border: "none",
+                    borderRadius: 8,
+                    fontSize: 13,
+                    fontWeight: 500,
+                    cursor: "pointer",
+                    fontFamily: "'Nunito', sans-serif",
+                  }}
+                >
+                  ОК
+                </motion.button>
+              )}
+            </div>
+            {promoMessage && (
+              <div
+                style={{
+                  marginTop: 8,
+                  fontSize: 13,
+                  color: isPromoValid ? "#4CAF50" : "#ff5252",
+                  fontFamily: "'Nunito', sans-serif",
+                }}
+              >
+                {promoMessage}
+              </div>
+            )}
+          </div>
+        </section>
+
         {/* Цена */}
         <section style={{ marginBottom: 24 }}>
           <div
@@ -220,15 +342,57 @@ export default function ProductPage() {
             >
               Цена
             </span>
-            <span
-              style={{
-                fontSize: 24,
-                fontWeight: 600,
-                fontFamily: "'Nunito', sans-serif",
-              }}
-            >
-              {product.price.toLocaleString("ru-RU")} ₽
-            </span>
+            <div style={{ textAlign: "right" }}>
+              {isPromoValid && promoDiscount > 0 ? (
+                <>
+                  <span
+                    style={{
+                      fontSize: 16,
+                      color: "#999",
+                      textDecoration: "line-through",
+                      marginRight: 8,
+                      fontFamily: "'Nunito', sans-serif",
+                    }}
+                  >
+                    {product.price.toLocaleString("ru-RU")} ₽
+                  </span>
+                  <span
+                    style={{
+                      fontSize: 24,
+                      fontWeight: 600,
+                      color: "#4CAF50",
+                      fontFamily: "'Nunito', sans-serif",
+                    }}
+                  >
+                    {calculateDiscountedPrice(
+                      product.price,
+                      promoDiscount
+                    ).toLocaleString("ru-RU")}{" "}
+                    ₽
+                  </span>
+                  <div
+                    style={{
+                      fontSize: 12,
+                      color: "#4CAF50",
+                      fontFamily: "'Nunito', sans-serif",
+                      marginTop: 4,
+                    }}
+                  >
+                    Скидка: {promoDiscount.toLocaleString("ru-RU")} ₽
+                  </div>
+                </>
+              ) : (
+                <span
+                  style={{
+                    fontSize: 24,
+                    fontWeight: 600,
+                    fontFamily: "'Nunito', sans-serif",
+                  }}
+                >
+                  {product.price.toLocaleString("ru-RU")} ₽
+                </span>
+              )}
+            </div>
           </div>
         </section>
 
