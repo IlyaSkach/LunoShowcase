@@ -6,6 +6,7 @@ import {
   validatePromocode,
   calculateDiscountedPrice,
 } from "../data/promocodes";
+import { sendPromoActivation } from "../data/api";
 import FooterBlocks from "../components/FooterBlocks";
 
 export default function ProductPage() {
@@ -26,6 +27,16 @@ export default function ProductPage() {
     setPromoDiscount(result.discount);
     setPromoMessage(result.message);
     setIsPromoValid(result.valid);
+
+    // Отправляем статистику при успешной активации
+    if (result.valid && product) {
+      sendPromoActivation({
+        code: promoCode,
+        discount: result.discount,
+        productId: product.id,
+        productName: product.name,
+      });
+    }
   };
 
   // Сброс промокода

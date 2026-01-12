@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.DS_Store
+
+# Bot secrets & runtime data
+bot/.env
+bot/promo-stats.json
