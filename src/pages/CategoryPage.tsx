@@ -35,7 +35,10 @@ export default function CategoryPage({ category }: CategoryPageProps) {
   // Отслеживание QR-переходов на страницу "Акция"
   useEffect(() => {
     const source = searchParams.get("source");
-    if (category === "promotion" && source === "qr_promo") {
+    const startapp = searchParams.get("startapp");
+    
+    // Обрабатываем как source=qr_promo, так и startapp=qr_promo
+    if (category === "promotion" && (source === "qr_promo" || startapp === "qr_promo")) {
       sendQRVisit({
         type: "promo",
         source: "qr_promo",

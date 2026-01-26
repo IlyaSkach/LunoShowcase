@@ -29,6 +29,20 @@ const bot = new Bot(BOT_TOKEN);
 
 // Команда /start
 bot.command("start", async (ctx) => {
+  const startParam = ctx.match?.trim(); // Параметр после /start
+  
+  // Определяем URL в зависимости от параметра
+  let url = MINI_APP_URL;
+  let buttonText = "💎 Открыть каталог";
+  
+  if (startParam === "promo_qr") {
+    url = `${MINI_APP_URL}/promotion?source=qr_promo`;
+    buttonText = "🎯 Открыть акцию";
+  } else if (startParam === "chat_qr") {
+    url = `${MINI_APP_URL}/chat?source=qr_chat`;
+    buttonText = "💬 Связаться с менеджером";
+  }
+  
   await ctx.reply(
     "👋 Добро пожаловать в LUNO Diamonds!\n\n" +
       "Нажмите кнопку ниже, чтобы открыть каталог украшений.",
@@ -37,8 +51,8 @@ bot.command("start", async (ctx) => {
         inline_keyboard: [
           [
             {
-              text: "💎 Открыть каталог",
-              web_app: { url: MINI_APP_URL },
+              text: buttonText,
+              web_app: { url },
             },
           ],
         ],

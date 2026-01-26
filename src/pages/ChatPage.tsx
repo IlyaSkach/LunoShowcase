@@ -11,7 +11,10 @@ export default function ChatPage() {
   // Отслеживание QR-переходов и показ приветствия
   useEffect(() => {
     const source = searchParams.get("source");
-    if (source === "qr_chat") {
+    const startapp = searchParams.get("startapp");
+    
+    // Обрабатываем как source=qr_chat, так и startapp=qr_chat
+    if (source === "qr_chat" || startapp === "qr_chat") {
       // Отправляем статистику
       sendQRVisit({
         type: "chat",
