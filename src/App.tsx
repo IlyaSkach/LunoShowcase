@@ -1,5 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
+import { useTelegram } from "./hooks/useTelegram";
 import HomePage from "./pages/HomePage";
 import CategoryPage from "./pages/CategoryPage";
 import ProductPage from "./pages/ProductPage";
@@ -8,6 +9,9 @@ import VIPPage from "./pages/VIPPage";
 import ChatPage from "./pages/ChatPage";
 
 export default function App(): React.JSX.Element {
+  // Инициализация Telegram WebApp в полноэкранном режиме
+  useTelegram();
+
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
