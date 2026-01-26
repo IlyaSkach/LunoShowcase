@@ -59,3 +59,32 @@ export async function sendPromoActivation(data: {
     console.warn("Не удалось отправить статистику промокода:", error);
   }
 }
+
+// Отправка данных о QR-переходе
+export async function sendQRVisit(data: {
+  type: "promo" | "chat";
+  source?: string;
+}): Promise<void> {
+  try {
+    const user = getTelegramUser();
+
+    const response = await fetch(`${API_URL}/api/qr-visit`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        type: data.type,
+        source: data.source || "",
+        ...user,
+      }),
+    });
+
+    if (!response.ok) {
+      console.warn("Ошибка отправки статистики QR-перехода:", response.status);
+    }
+  } catch (error) {
+    // Не блокируем UI при ошибке отправки статистики
+    console.warn("Не удалось отправить статистику QR-перехода:", error);
+  }
+}

@@ -5,3 +5,4 @@ dist/
 # Bot secrets & runtime data
 bot/.env
 bot/promo-stats.json
+bot/credentials.json

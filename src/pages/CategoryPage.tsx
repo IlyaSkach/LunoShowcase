@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { getProductsByCategory, Product } from "../data/products";
+import { sendQRVisit } from "../data/api";
 import FooterBlocks from "../components/FooterBlocks";
 
 interface CategoryPageProps {
-  category: "rings" | "earrings" | "necklaces" | "collections";
+  category: "rings" | "earrings" | "necklaces" | "collections" | "newlyweds" | "promotion";
 }
 
 const CATEGORY_TITLES = {
@@ -13,10 +14,13 @@ const CATEGORY_TITLES = {
   earrings: "СЕРЬГИ",
   necklaces: "КОЛЬЕ",
   collections: "УКРАШЕНИЯ С ЦВЕТНЫМИ БРИЛЛИАНТАМИ",
+  newlyweds: "МОЛОДОЖЕНАМ",
+  promotion: "АКЦИЯ",
 };
 
 export default function CategoryPage({ category }: CategoryPageProps) {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const products = getProductsByCategory(category);
   const [sortBy, setSortBy] = useState<
     "price-asc" | "price-desc" | "rating-asc" | "rating-desc"
@@ -27,6 +31,17 @@ export default function CategoryPage({ category }: CategoryPageProps) {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  // Отслеживание QR-переходов на страницу "Акция"
+  useEffect(() => {
+    const source = searchParams.get("source");
+    if (category === "promotion" && source === "qr_promo") {
+      sendQRVisit({
+        type: "promo",
+        source: "qr_promo",
+      });
+    }
+  }, [category, searchParams]);
 
   // Список изображений, которые отсутствуют (скрываем эти товары)
   const hiddenImages = new Set<string>([

@@ -4,13 +4,22 @@ import WebApp from "@twa-dev/sdk";
 import { AnimatePresence, motion } from "framer-motion";
 import FooterBlocks from "../components/FooterBlocks";
 
-type CategoryKey = "rings" | "earrings" | "necklaces" | "collections" | null;
+type CategoryKey =
+  | "rings"
+  | "earrings"
+  | "necklaces"
+  | "collections"
+  | "newlyweds"
+  | "promotion"
+  | null;
 
 const MENU: { key: Exclude<CategoryKey, null>; title: string }[] = [
   { key: "rings", title: "КОЛЬЦА" },
   { key: "earrings", title: "СЕРЬГИ" },
   { key: "necklaces", title: "КОЛЬЕ" },
   { key: "collections", title: "УКРАШЕНИЯ С ЦВЕТНЫМИ БРИЛЛИАНТАМИ" },
+  { key: "newlyweds", title: "МОЛОДОЖЕНАМ" },
+  { key: "promotion", title: "АКЦИЯ" },
 ];
 
 function useTelegramInit(): void {
@@ -258,6 +267,52 @@ export default function HomePage() {
               <img
                 src="/images/yello_btn.png"
                 alt="Украшения с цветными бриллиантами"
+                style={{
+                  width: "100%",
+                  height: "auto",
+                  display: "block",
+                  borderRadius: 12,
+                }}
+              />
+            </motion.button>
+
+            <motion.button
+              type="button"
+              whileTap={{ scale: 0.98 }}
+              onClick={() => navigate("/newlyweds")}
+              style={{
+                border: "none",
+                background: "transparent",
+                padding: 0,
+                cursor: "pointer",
+              }}
+            >
+              <img
+                src="/images/newlyweds_btn.png"
+                alt="Молодоженам"
+                style={{
+                  width: "100%",
+                  height: "auto",
+                  display: "block",
+                  borderRadius: 12,
+                }}
+              />
+            </motion.button>
+
+            <motion.button
+              type="button"
+              whileTap={{ scale: 0.98 }}
+              onClick={() => navigate("/promotion")}
+              style={{
+                border: "none",
+                background: "transparent",
+                padding: 0,
+                cursor: "pointer",
+              }}
+            >
+              <img
+                src="/images/promo_btn.png"
+                alt="Акция"
                 style={{
                   width: "100%",
                   height: "auto",

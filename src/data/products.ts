@@ -9,7 +9,7 @@ export interface Product {
   clarity: string;
   metal: string;
   description?: string;
-  category: "rings" | "earrings" | "necklaces" | "collections";
+  category: "rings" | "earrings" | "necklaces" | "collections" | "newlyweds" | "promotion";
   rating: number; // от 1 до 5
 }
 
@@ -595,12 +595,120 @@ export const collections: Product[] = [
  
 ];
 
+export const newlyweds: Product[] = [
+  {
+    id: "newlyweds-001",
+    name: "Кольцо Unity с бриллиантом",
+    price: 160000,
+    image: "/images/products/newlyweds/22.webp",
+    weight: "1 ct",
+    color: "DEF",
+    clarity: "VVS-VS",
+    metal: "Белое золото 750 пробы",
+    category: "newlyweds",
+    rating: 1,
+  },
+ {
+    id: "newlyweds-002",
+    name: "Кольцо Unity с бриллиантом",
+    price: 160000,
+    image: "/images/products/newlyweds/23.png",
+    weight: "1 ct",
+    color: "DEF",
+    clarity: "VVS-VS",
+    metal: "Белое золото 750 пробы",
+    category: "newlyweds",
+    rating: 2,
+  },
+ 
+ 
+ {
+    id: "newlyweds-003",
+    name: "Кольцо Unity с бриллиантом",
+    price: 160000,
+    image: "/images/products/newlyweds/24.png",
+    weight: "1 ct",
+    color: "D-E",
+    clarity: "VVS-VS",
+    metal: "Белое золото 750 пробы",
+    category: "newlyweds",
+    rating: 3,
+  },
+ {
+    id: "newlyweds-004",
+    name: "Кольцо Unity с бриллиантом",
+    price: 160000,
+    image: "/images/products/newlyweds/25.webp",
+    weight: "1 ct",
+    color: "DEF",
+    clarity: "VVS-VS",
+    metal: "Желтое золото 750 пробы",
+    category: "newlyweds",
+    rating: 4,
+  },
+ {
+    id: "newlyweds-005",
+    name: "Кольцо Unity с бриллиантом",
+    price: 160000,
+    image: "/images/products/newlyweds/26.webp",
+    weight: "1 ct",
+    color: "DEF",
+    clarity: "VVS-VS",
+    metal: "Белое золото 750 пробы",
+    category: "newlyweds",
+    rating: 5,
+  },
+]; 
+
+export const promotion: Product[] = [
+  {
+    id: "promotion-001",
+    name: "Колье Radiant solare",
+    price: 200000,
+    image: "/images/products/promotion/19.png",
+    weight: "1 ct",
+    color: "Fancy Yellow",
+    clarity: "VS2",
+    metal: "Желтое золото 750 пробы",
+    category: "promotion",
+    rating: 1,
+  },
+  {
+    id: "promotion-002",
+    name: "Колье Cuore solare",
+    price: 200000,
+    image: "/images/products/promotion/27.png",
+    weight: "1 ct",
+    color: "Fancy Yellow",
+    clarity: "VS2",
+    metal: "Желтое золото 750 пробы",
+    category: "promotion",
+    rating: 2,
+  },
+  {
+    id: "promotion-003",
+    name: "Колье Fiore",
+    price: 15000,
+    image: "/images/products/promotion/37.png",
+    weight: "1.2 ct",
+    color: "DEF",
+    clarity: "VVS-VS",
+    metal: "Белое золото 750 пробы",
+    category: "promotion",
+    rating: 3,
+  },
+]
+
+
+
 // Все товары
 export const allProducts: Product[] = [
   ...necklaces,
   ...rings,
   ...earrings,
   ...collections,
+  ...newlyweds,       
+  ...promotion
 ];
 
 // Получить товары по категории
@@ -614,6 +722,12 @@ export const getProductsByCategory = (category: string): Product[] => {
       return necklaces;
     case "collections":
       return collections;
+    case "newlyweds":
+      // Пока возвращаем пустой массив, можно добавить специальные товары для молодоженов
+      return newlyweds;
+    case "promotion":
+      // Пока возвращаем пустой массив, можно добавить акционные товары
+      return promotion;
     default:
       return [];
   }

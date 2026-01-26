@@ -5,6 +5,7 @@ import CategoryPage from "./pages/CategoryPage";
 import ProductPage from "./pages/ProductPage";
 import AboutPage from "./pages/AboutPage";
 import VIPPage from "./pages/VIPPage";
+import ChatPage from "./pages/ChatPage";
 
 export default function App(): React.JSX.Element {
   return (
@@ -20,6 +21,12 @@ export default function App(): React.JSX.Element {
         path="/collections"
         element={<CategoryPage category="collections" />}
       />
+      <Route
+        path="/newlyweds"
+        element={<CategoryPage category="newlyweds" />}
+      />
+      <Route path="/promotion" element={<CategoryPage category="promotion" />} />
+      <Route path="/chat" element={<ChatPage />} />
       <Route path="/:category/:id" element={<ProductPage />} />
       <Route path="/about" element={<AboutPage />} />
       <Route path="/vip" element={<VIPPage />} />

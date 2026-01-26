@@ -85,7 +85,7 @@ app.use(cors());
 app.use(express.json());
 
 // Эндпоинт для приёма активаций промокодов
-app.post("/api/promo-activation", (req, res) => {
+app.post("/api/promo-activation", async (req, res) => {
   try {
     const {
       code,
@@ -112,12 +112,40 @@ app.post("/api/promo-activation", (req, res) => {
       timestamp: new Date().toISOString(),
     };
 
-    addActivation(activation);
+    await addActivation(activation);
     console.log(`✅ Промокод ${code} активирован`);
 
     return res.json({ success: true });
   } catch (error) {
     console.error("Ошибка при обработке активации:", error);
+    return res.status(500).json({ error: "Внутренняя ошибка сервера" });
+  }
+});
+
+// Эндпоинт для приёма QR-переходов
+app.post("/api/qr-visit", async (req, res) => {
+  try {
+    const { type, userId, username, firstName, source } = req.body;
+
+    if (!type || (type !== "promo" && type !== "chat")) {
+      return res.status(400).json({ error: "Тип должен быть 'promo' или 'chat'" });
+    }
+
+    // Записываем в Google Sheets
+    const { addQRVisitToSheets } = await import("./sheets.js");
+    await addQRVisitToSheets({
+      type,
+      userId: userId || null,
+      username: username || null,
+      firstName: firstName || null,
+      source: source || "",
+    });
+
+    console.log(`✅ QR переход (${type}) зарегистрирован`);
+
+    return res.json({ success: true });
+  } catch (error) {
+    console.error("Ошибка при обработке QR перехода:", error);
     return res.status(500).json({ error: "Внутренняя ошибка сервера" });
   }
 });

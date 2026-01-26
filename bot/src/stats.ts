@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { addPromoToSheets } from "./sheets.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const STATS_FILE = path.join(__dirname, "..", "promo-stats.json");
@@ -54,7 +55,7 @@ function saveStats(data: StatsData): void {
 }
 
 // Добавление активации промокода
-export function addActivation(activation: PromoActivation): void {
+export async function addActivation(activation: PromoActivation): Promise<void> {
   const stats = loadStats();
   const code = activation.code.toUpperCase();
 
@@ -74,6 +75,24 @@ export function addActivation(activation: PromoActivation): void {
   stats.promocodes[code].activations.push(activation);
 
   saveStats(stats);
+
+  // Также записываем в Google Sheets (не блокируем, если ошибка)
+  try {
+    const success = await addPromoToSheets({
+      code: activation.code,
+      discount: activation.discount,
+      userId: activation.userId,
+      username: activation.username,
+      firstName: activation.firstName,
+      productId: activation.productId,
+      productName: activation.productName,
+    });
+    if (!success) {
+      console.warn(`⚠️ Не удалось записать промокод ${activation.code} в Google Sheets`);
+    }
+  } catch (error) {
+    console.error("❌ Ошибка при записи в Google Sheets:", error);
+  }
 }
 
 // Получение статистики по всем промокодам
