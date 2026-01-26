@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { sendQRVisit } from "../data/api";
 
 export default function ChatPage() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const [showWelcome, setShowWelcome] = useState(false);
 
-  // Отслеживание QR-переходов и показ приветствия
+  // Отслеживание QR-переходов
   useEffect(() => {
     const source = searchParams.get("source");
     const startapp = searchParams.get("startapp");
@@ -20,20 +19,12 @@ export default function ChatPage() {
         type: "chat",
         source: "qr_chat",
       });
-
-      // Показываем приветствие
-      setShowWelcome(true);
     }
   }, [searchParams]);
 
   // Переход в чат с менеджером
   const handleOpenChat = () => {
     window.open("https://t.me/lunodiamonds", "_blank");
-  };
-
-  // Закрытие приветствия
-  const handleCloseWelcome = () => {
-    setShowWelcome(false);
   };
 
   return (
@@ -193,102 +184,6 @@ export default function ChatPage() {
           </div>
         </section>
       </main>
-
-      {/* Модальное окно с приветствием (если переход по QR) */}
-      <AnimatePresence>
-        {showWelcome && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            onClick={handleCloseWelcome}
-            style={{
-              position: "fixed",
-              inset: 0,
-              background: "rgba(0, 0, 0, 0.5)",
-              zIndex: 9999,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              padding: 16,
-            }}
-          >
-            <motion.div
-              initial={{ scale: 0.9 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0.9 }}
-              transition={{ duration: 0.2 }}
-              onClick={(e) => e.stopPropagation()}
-              style={{
-                background: "#fff",
-                borderRadius: 16,
-                padding: "32px 24px",
-                maxWidth: 400,
-                width: "100%",
-                textAlign: "center",
-              }}
-            >
-              <h2
-                style={{
-                  fontSize: 22,
-                  fontWeight: 600,
-                  margin: "0 0 16px 0",
-                  fontFamily: "'Nunito', sans-serif",
-                }}
-              >
-                Добро пожаловать!
-              </h2>
-              <p
-                style={{
-                  fontSize: 15,
-                  color: "#666",
-                  margin: "0 0 24px 0",
-                  lineHeight: 1.5,
-                  fontFamily: "'Nunito', sans-serif",
-                }}
-              >
-                Наш менеджер готов помочь вам выбрать идеальное украшение.
-              </p>
-              <motion.button
-                type="button"
-                onClick={handleOpenChat}
-                whileTap={{ scale: 0.97 }}
-                style={{
-                  padding: "12px 24px",
-                  background: "#000",
-                  color: "#fff",
-                  border: "none",
-                  borderRadius: 8,
-                  fontSize: 14,
-                  fontWeight: 600,
-                  cursor: "pointer",
-                  fontFamily: "'Nunito', sans-serif",
-                  marginBottom: 12,
-                  width: "100%",
-                }}
-              >
-                СВЯЗАТЬСЯ С МЕНЕДЖЕРОМ
-              </motion.button>
-              <button
-                type="button"
-                onClick={handleCloseWelcome}
-                style={{
-                  padding: "8px 16px",
-                  background: "transparent",
-                  color: "#666",
-                  border: "none",
-                  fontSize: 13,
-                  cursor: "pointer",
-                  fontFamily: "'Nunito', sans-serif",
-                }}
-              >
-                Закрыть
-              </button>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 }
