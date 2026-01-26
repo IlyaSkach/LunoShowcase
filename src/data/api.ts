@@ -10,15 +10,49 @@ function getTelegramUser(): {
   firstName: string | null;
 } {
   try {
+    // Пробуем разные способы получения данных
     const tg = (window as any).Telegram?.WebApp;
-    const user = tg?.initDataUnsafe?.user;
+    
+    // Способ 1: initDataUnsafe (быстрый, но может быть небезопасен)
+    let user = tg?.initDataUnsafe?.user;
+    
+    // Способ 2: если initDataUnsafe пуст, пробуем через initData (требует парсинга)
+    if (!user && tg?.initData) {
+      try {
+        // Парсим initData (формат: key1=value1&key2=value2&user={...})
+        const params = new URLSearchParams(tg.initData);
+        const userParam = params.get("user");
+        if (userParam) {
+          user = JSON.parse(decodeURIComponent(userParam));
+        }
+      } catch (e) {
+        console.warn("Не удалось распарсить initData:", e);
+      }
+    }
 
     if (user) {
-      return {
+      const result = {
         userId: user.id || null,
         username: user.username || null,
         firstName: user.first_name || null,
       };
+      
+      // Логируем для отладки (только в dev режиме)
+      if (import.meta.env.DEV) {
+        console.log("👤 Данные пользователя Telegram:", result);
+      }
+      
+      return result;
+    } else {
+      // Логируем, если данные не найдены
+      if (import.meta.env.DEV) {
+        console.warn("⚠️ Telegram WebApp данные не найдены:", {
+          hasTelegram: !!window.Telegram,
+          hasWebApp: !!(window as any).Telegram?.WebApp,
+          hasInitDataUnsafe: !!(window as any).Telegram?.WebApp?.initDataUnsafe,
+          hasInitData: !!(window as any).Telegram?.WebApp?.initData,
+        });
+      }
     }
   } catch (error) {
     console.warn("Не удалось получить данные пользователя Telegram:", error);

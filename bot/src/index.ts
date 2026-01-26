@@ -127,6 +127,16 @@ app.post("/api/qr-visit", async (req, res) => {
   try {
     const { type, userId, username, firstName, source } = req.body;
 
+    // Логируем входящие данные для отладки
+    console.log("📥 QR-переход получен:", {
+      type,
+      userId,
+      username,
+      firstName,
+      source,
+      fullBody: JSON.stringify(req.body),
+    });
+
     if (!type || (type !== "promo" && type !== "chat")) {
       return res.status(400).json({ error: "Тип должен быть 'promo' или 'chat'" });
     }
